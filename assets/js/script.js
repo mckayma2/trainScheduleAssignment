@@ -26,7 +26,9 @@ var strkey;
 var strindex;
 var checkindex; 
 var hour;
-var minute;	
+var minute;
+var timeinMin;
+var timeinMinTrain;	
 	function func1() {
  	database.ref('trainSchedule/').remove();
  	database.ref('index').set({number: 0});
@@ -65,21 +67,10 @@ $(".btnadd").click(function() {
 	$("tbody").append('<tr><th scope="row">' + indexNumber + '</th><td>' + data.val().Train_Name + '</td><td>' + data.val().Destination + '</td><td>' + data.val().Frequency + '</td><td>#</td></tr>')
 	console.log(data.val().Train_Time.split(':')[0]);
 		console.log(moment().format('H'));
-
-	if(moment().format('H') >= data.val().Train_Time.split(':')[0]){
-	hour= moment().format('H')- data.val().Train_Time.split(':')[0];
-	}
-	else	{
-	hour= data.val().Train_Time.split(':')[0] - moment().format('H');
-	}
-	console.log(hour);
-	if(moment().format('mm') >= data.val().Train_Time.split(':')[1]){
-	minute= moment().format('mm')- data.val().Train_Time.split(':')[1];
-	}
-	else	{
-	minute= data.val().Train_Time.split(':')[1] - moment().format('mm');
-	}
-	console.log(minute);
+	 timeinMin= parseInt((moment().format('H') * 60 )) + parseInt((moment().format('mm')));
+	 timeinMinTrain = parseInt((data.val().Train_Time.split(':')[0] * 60)) + parseInt((data.val().Train_Time.split(':')[1]));
+	console.log(timeinMin);
+	console.log(timeinMinTrain);
 	
 	});
 

@@ -1,0 +1,75 @@
+﻿	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Train Schedule</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+ 		 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+ 		 crossorigin="anonymous">
+ 		 </script>
+		 <script src="https://cdn.jsdelivr.net/npm/moment@2.19.4/moment.min.js"></script>
+ 		 <script src="assets/js/script.js" type="text/javascript"></script>
+
+	</head>
+	<body>
+	<div class="container">
+		<div class="jumbotron">
+    			<h1>Train Scedule</h1> 
+		
+     		
+  		</div>
+		<div class="row">
+		  	<div class="col-md-2">
+			</div>	
+		  	<div class="col-md-8">
+
+			<div class="card">
+			  <h5 class="card-header text-success">Current Train Schedule<span id="time"></span></h5>
+			  <div class="card-block">
+			   <table class="table">
+ 			 <thead>
+ 			   <tr>
+  			    <th>#</th>
+   			   <th>Train Name</th>
+   			   <th>Destination</th>
+   			   <th>Frequency</th>
+   			   <th>Next Arrival</th>
+    			  <th>Minutes Away</th>
+    			</tr>
+ 			 </thead>
+ 			 <tbody>
+ 			 
+ 			 </tbody>
+			</table> 
+    
+	 	</div>
+	</div>
+
+	<div class="card">
+  	<h5 class="card-header text-success">Add Train</h5>
+ 			 <div class="card-block">
+    			
+			<input class="form-control" id="trainName" type="text" placeholder="Train Name">
+			 
+			<input class="form-control" id="destination" type="text" placeholder="Destination">
+			
+			<input class="form-control" id="trainTime" type="text" placeholder="Train Time (HH:mm-Military Time)">
+			
+			<input class="form-control" id="frequency" type="text" placeholder="Frequency(min)">
+			<button type="click" class="btn btn-primary btnadd">Submit</button>
+			
+  			</div>
+	</div>
+
+</div>
+			<div class="col-md-2">
+				
+			</div>
+	      </div>
+	
+
+	</div>
+	<script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+	</body>
+	</html>

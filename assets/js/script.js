@@ -12,7 +12,9 @@ $( document ).ready(function() {
     messagingSenderId: "316913363679"
   };
   firebase.initializeApp(config);
+// Variables
 
+//=================================================================
 var database = firebase.database();
 var trainName;
 var destination;
@@ -28,21 +30,28 @@ var checkindex;
 var hour;
 var minute;
 var timeinMin;
-var timeinMinTrain;	
+var timeinMinTrain;
+
+// functions
+//=================================================================
+	//function on page load to clear database
+	
 	function func1() {
  	database.ref('trainSchedule/').remove();
  	database.ref('index').set({number: 0});
 	}
 	window.onload=func1();
+	// function to place current timon page
 	
 	function time1() {
  	
 	$("#time").html("<br>Time Now: " + moment().format('LTS'));
 	
 	}
-
-
 	window.onload=setInterval(time1, 1000);
+
+// button click 
+//=================================================================
 	
 	
 $(".btnadd").click(function() {
@@ -52,6 +61,8 @@ $(".btnadd").click(function() {
 	trainTime= $("#trainTime").val();
 	frequency = $("#frequency").val();
 	//console.log(trainName + " " + destination + "  " + trainTime +  "  " + frequency);
+
+//create db parameters using index key "indexNumber"
 	
 	database.ref('trainSchedule/index' + indexNumber).push({
    
@@ -62,29 +73,39 @@ $(".btnadd").click(function() {
 	
  	});
 	
+// retreival of data from Firebase
+
 	database.ref('trainSchedule/index' + indexNumber).on('child_added', function(data){
 	
+	// push data to table	
 	$("tbody").append('<tr><th scope="row">' + indexNumber + '</th><td>' + data.val().Train_Name + '</td><td>' + data.val().Destination + '</td><td>' + data.val().Frequency + '</td><td>#</td></tr>')
 	console.log(data.val().Train_Time.split(':')[0]);
 		console.log(moment().format('H'));
-	 timeinMin= parseInt((moment().format('H') * 60 )) + parseInt((moment().format('mm')));
-	 timeinMinTrain = parseInt((data.val().Train_Time.split(':')[0] * 60)) + parseInt((data.val().Train_Time.split(':')[1]));
+	
+	//convert current time to minutes 
+	timeinMin= parseInt((moment().format('H') * 60 )) + parseInt((moment().format('mm')));
+	
+	// convert time entered to minutes
+	timeinMinTrain = parseInt((data.val().Train_Time.split(':')[0] * 60)) + parseInt((data.val().Train_Time.split(':')[1]));
 	console.log(timeinMin);
 	console.log(timeinMinTrain);
 	
 	});
-
+	// clear input parameters
+	
 	$("#trainName").val("");
 	$("#destination").val("");
 	$("#trainTime").val("");
 	$("#frequency").val("");
 	
-  		
+  	//set index in firebase
+	
 	database.ref('index').set({
    	   number: indexNumber
 	  
 	});
 	
+	//get index from firebase and increase index
 	database.ref('index').on('value', function(snapshot){
 	console.log("this "+ snapshot.val().number);
 
@@ -96,7 +117,7 @@ $(".btnadd").click(function() {
 
 	
 
-// code to convert the index and I to string and back
+// code to convert the index and I to string and back to int (NOT USED)
 	
 //	 strkey = index.toString();
 //	 strindex = 'data.val().index';

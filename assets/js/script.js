@@ -1,8 +1,10 @@
 // A $( document ).ready() block.
+//=================================================================
 $( document ).ready(function() {
     //console.log( "ready!" ); // Document ready test
 	
  // Initialize Firebase
+//=================================================================
   var config = {
     apiKey: "AIzaSyBsqjsWufoByR79LHN1vrRCS27_J4dxk0M",
     authDomain: "train-scheduler-8e2d3.firebaseapp.com",
@@ -63,6 +65,7 @@ $(".btnadd").click(function() {
 	//console.log(trainName + " " + destination + "  " + trainTime +  "  " + frequency);
 
 //create db parameters using index key "indexNumber"
+//=================================================================
 	
 	database.ref('trainSchedule/index' + indexNumber).push({
    
@@ -74,6 +77,7 @@ $(".btnadd").click(function() {
  	});
 	
 // retreival of data from Firebase
+//=================================================================
 
 	database.ref('trainSchedule/index' + indexNumber).on('child_added', function(data){
 	
@@ -82,9 +86,11 @@ $(".btnadd").click(function() {
 		console.log(moment().format('H'));
 	
 	//convert current time to minutes 
+	//================================
 	timeinMin= parseInt((moment().format('H') * 60 )) + parseInt((moment().format('mm')));
 	
 	// convert time entered to minutes
+	//================================
 	timeinMinTrain = parseInt((data.val().Train_Time.split(':')[0] * 60)) + parseInt((data.val().Train_Time.split(':')[1]));
 	console.log(timeinMin);
 	console.log(timeinMinTrain);
@@ -123,8 +129,10 @@ $(".btnadd").click(function() {
 			
 		}
 	// Minutes away and next arrival calculation
+	//=================================================================
 			
 			//for anytime before current time
+			//=================================
 			
 			if(timeinMin > timeinMinTrain){
 				
@@ -141,6 +149,7 @@ $(".btnadd").click(function() {
 				console.log('nextArrival' + nextArrival);
 			}
 			//for future time after current time
+			//===================================
 			
 			if(timeinMin < timeinMinTrain){
 				if(minutesAway < 1){
@@ -157,11 +166,13 @@ $(".btnadd").click(function() {
 			}
 	
 	// push data to table	
+	//=================================================================
 	
 	$("tbody").append('<tr><th scope="row">' + indexNumber + '</th><td>' + data.val().Train_Name + '</td><td>' + data.val().Destination + '</td><td>' + data.val().Frequency + '</td><td>' + nextArrival + '</td><td>' + minutesAway + '</td></tr>')
 	
 	});
 	// clear input parameters
+	//=================================================================
 	
 	$("#trainName").val("");
 	$("#destination").val("");
@@ -169,6 +180,7 @@ $(".btnadd").click(function() {
 	$("#frequency").val("");
 	
   	//set index in firebase
+	//=================================================================
 	
 	database.ref('index').set({
    	   number: indexNumber
@@ -176,6 +188,8 @@ $(".btnadd").click(function() {
 	});
 	
 	//get index from firebase and increase index
+	//=================================================================
+
 	database.ref('index').on('value', function(snapshot){
 	console.log("this "+ snapshot.val().number);
 
@@ -188,6 +202,7 @@ $(".btnadd").click(function() {
 	
 
 // code to convert the index and I to string and back to int (NOT USED)
+//=====================================================================
 	
 //	 strkey = index.toString();
 //	 strindex = 'data.val().index';

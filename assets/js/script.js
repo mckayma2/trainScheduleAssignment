@@ -179,26 +179,6 @@ $(".btnadd").click(function() {
 	
 	});
 	
-	// Minutes Away countdown timer
-	//=================================================================
-	function Timer(){
-		if (timer.length>=0){
-			for(t = 0;t <= timer.length; t++){
-				if(timer[t]>0){
-				timer[t]--;
-				$('#'+ t).text(timer[t]);
-				console.log(timer[t]);
-				}
-				if(timer[t]===0){
-				$('#'+ t).text('Train Departed');
-				
-				}
-			}
-		}
-	
-	}setInterval(Timer, 60000);
-	console.log(timer);
-
 	// clear input parameters
 	//=================================================================
 	
@@ -236,6 +216,25 @@ $(".btnadd").click(function() {
 //	 strindex = 'data.val().index';
 //	 checkindex = eval(strindex + strkey);
 		
+// Minutes Away countdown timer
+//=================================================================
+	function Timer(){
+		if (timer.length>=0){
+			for(t = 0;t <= timer.length; t++){
+				if(timer[t]>0){
+				timer[t]--;
+				$('#'+ t).text(timer[t]);
+				console.log(timer[t]);
+				}
+				if(timer[t]===0){
+				$('#'+ t).text('Train Departed');
+				
+				}
+			}
+		}
+	
+	}setInterval(Timer, 60000);
+	console.log(timer);
 
 });  //closing
 

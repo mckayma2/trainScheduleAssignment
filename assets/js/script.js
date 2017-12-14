@@ -33,6 +33,7 @@ var hour;
 var minute;
 var timeinMin;
 var timeinMinTrain;
+var timer = [];
 
 // functions
 //=================================================================
@@ -168,9 +169,36 @@ $(".btnadd").click(function() {
 	// push data to table	
 	//=================================================================
 	
-	$("tbody").append('<tr><th scope="row">' + indexNumber + '</th><td>' + data.val().Train_Name + '</td><td>' + data.val().Destination + '</td><td>' + data.val().Frequency + '</td><td>' + nextArrival + '</td><td>' + minutesAway + '</td></tr>')
+	
+	$("tbody").append('<tr><th scope="row">' + indexNumber + '</th><td>' + data.val().Train_Name + '</td><td>' + data.val().Destination + '</td><td>' + data.val().Frequency + '</td><td>' + nextArrival + '</td><td id=' + indexNumber + '>' + minutesAway + '</td></tr>')
+	
+	// Array for countdown timer	
+	//==========================
+	timer.push(minutesAway);
+	console.log(timer);
 	
 	});
+	
+	// Minutes Away countdown timer
+	//=================================================================
+	function Timer(){
+		if (timer.length>=0){
+			for(t = 0;t <= timer.length; t++){
+				if(timer[t]>0){
+				timer[t]--;
+				$('#'+ t).text(timer[t]);
+				console.log(timer[t]);
+				}
+				if(timer[t]===0){
+				$('#'+ t).text('Train Departed');
+				
+				}
+			}
+		}
+	
+	}setInterval(Timer, 60000);
+	console.log(timer);
+
 	// clear input parameters
 	//=================================================================
 	
